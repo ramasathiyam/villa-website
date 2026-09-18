@@ -1,4 +1,7 @@
 import SectionHeading from "@/components/ui/SectionHeading";
+import Reveal from "@/components/animations/Reveal";
+import RevealGroup from "@/components/animations/RevealGroup";
+import RevealItem from "@/components/animations/RevealItem";
 import styles from "./Testimonials.module.css";
 
 // Cream-background 3-column testimonials (CLAUDE.md §8.6) — used on Dining in the
@@ -18,10 +21,12 @@ export type TestimonialsProps = {
 export default function Testimonials({ heading = "What Our Guests Say", items }: TestimonialsProps) {
   return (
     <section className={styles.section}>
-      <SectionHeading>{heading}</SectionHeading>
-      <div className={styles.grid}>
-        {items.map((item) => (
-          <div className={styles.card} key={item.name}>
+      <Reveal>
+        <SectionHeading>{heading}</SectionHeading>
+      </Reveal>
+      <RevealGroup className={styles.grid}>
+        {items.map((item, index) => (
+          <RevealItem className={styles.card} index={index} key={item.name}>
             <p>&ldquo;{item.quote}&rdquo;</p>
             <div className={styles.avatarRow}>
               <span className={styles.avatar} aria-hidden="true" />
@@ -32,9 +37,9 @@ export default function Testimonials({ heading = "What Our Guests Say", items }:
                 </p>
               </div>
             </div>
-          </div>
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
     </section>
   );
 }

@@ -31,6 +31,8 @@
 
 .cocktailsPhoto {
   position: relative;
+  /* Clips the Reveal image variant's subtle scale(1.03 -> 1) entrance. */
+  overflow: hidden;
   min-height: 420px;
 }
 

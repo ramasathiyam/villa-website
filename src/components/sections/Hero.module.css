@@ -25,6 +25,20 @@
   inset: 0;
   z-index: 0;
   object-fit: cover;
+  /* Very subtle on-mount entrance (CLAUDE.md motion §6: Hero gets a light touch only,
+     never scroll-triggered since it's always visible immediately on load). Both keyframe
+     endpoints match the element's own static properties, so a browser that ignores the
+     animation (or prefers-reduced-motion below) still renders the correct final image. */
+  animation: heroImageIn var(--motion-duration-image) var(--motion-easing) both;
+}
+
+@keyframes heroImageIn {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .placeholder {
@@ -70,6 +84,25 @@
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
+  animation: heroContentIn var(--motion-duration) var(--motion-easing) both;
+}
+
+@keyframes heroContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content,
+  .image {
+    animation: none;
+  }
 }
 
 /* Activity's reference: title sits left-aligned within the content column, while the

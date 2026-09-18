@@ -8,6 +8,9 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import PriceBadge from "@/components/ui/PriceBadge";
 import Button from "@/components/ui/Button";
 import { rooms, familyRoom } from "@/data/rooms";
+import Reveal from "@/components/animations/Reveal";
+import RevealGroup from "@/components/animations/RevealGroup";
+import RevealItem from "@/components/animations/RevealItem";
 import styles from "./page.module.css";
 
 // Section order and copy follow /design/ROOM.png (Room task): Hero (+ search bar
@@ -41,11 +44,13 @@ export default function RoomPage() {
         linkDisabledReason={BOOKING_UNDEFINED}
       />
 
-      <div className={styles.roomGrid}>
-        {rooms.map((room) => (
-          <RoomCard key={room.id} room={room} />
+      <RevealGroup className={styles.roomGrid}>
+        {rooms.map((room, index) => (
+          <RevealItem key={room.id} index={index}>
+            <RoomCard room={room} />
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
 
       {/* Family Room + Hotel Information composite — the reference bakes a "FAMILY ROOM"
           label and price badge into the photo itself; both are re-rendered here as real
@@ -57,12 +62,14 @@ export default function RoomPage() {
           (disabled, booking flow undefined) already represents that same gap. */}
       <div className={styles.familyRoom}>
         <div className={styles.familyPhoto}>
-          <Image
-            src={familyRoom.image}
-            alt="Family Room bed with carved wooden headboard and folded towel elephants"
-            fill
-            className={styles.familyPhotoImg}
-          />
+          <Reveal variant="image">
+            <Image
+              src={familyRoom.image}
+              alt="Family Room bed with carved wooden headboard and folded towel elephants"
+              fill
+              className={styles.familyPhotoImg}
+            />
+          </Reveal>
           <span className={styles.familyLabel}>Family Room</span>
           <PriceBadge
             amount={`${familyRoom.currency}${familyRoom.ratePerNight.toLocaleString()}`}
@@ -73,24 +80,28 @@ export default function RoomPage() {
 
         <div className={styles.familyDetailCol}>
           <div className={styles.familyDetailPhoto}>
-            <Image
-              src="/images/rooms/family-room-detail.png"
-              alt="Bedside table with a lamp and fresh flowers in the Family Room"
-              fill
-              className={styles.familyDetailImg}
-            />
+            <Reveal variant="image">
+              <Image
+                src="/images/rooms/family-room-detail.png"
+                alt="Bedside table with a lamp and fresh flowers in the Family Room"
+                fill
+                className={styles.familyDetailImg}
+              />
+            </Reveal>
           </div>
           <div className={styles.familyDetailPhoto}>
-            <Image
-              src="/images/rooms/family-room-detail.png"
-              alt="Bedside table with a lamp and fresh flowers in the Family Room"
-              fill
-              className={styles.familyDetailImg}
-            />
+            <Reveal variant="image">
+              <Image
+                src="/images/rooms/family-room-detail.png"
+                alt="Bedside table with a lamp and fresh flowers in the Family Room"
+                fill
+                className={styles.familyDetailImg}
+              />
+            </Reveal>
           </div>
         </div>
 
-        <div className={styles.familyInfo}>
+        <Reveal className={styles.familyInfo}>
           <SectionHeading as="h2" align="left" uppercase={false}>
             Hotel Information
           </SectionHeading>
@@ -108,7 +119,7 @@ export default function RoomPage() {
               Book Now
             </Button>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       <PromoBanner

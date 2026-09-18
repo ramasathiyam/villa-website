@@ -1,5 +1,8 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import RevealGroup from "@/components/animations/RevealGroup";
+import RevealItem from "@/components/animations/RevealItem";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./GalleryStrip.module.css";
 
 // Row of images with captions — menu highlights / food strip on Dining (CLAUDE.md §8.7).
@@ -18,11 +21,13 @@ export type GalleryStripProps = {
 export default function GalleryStrip({ items, columns = 3 }: GalleryStripProps) {
   return (
     <section className={styles.section}>
-      <div className={styles.row} style={{ "--columns": columns } as CSSProperties}>
+      <RevealGroup className={styles.row} style={{ "--columns": columns } as CSSProperties}>
         {items.map((item, index) => (
-          <div className={styles.item} key={item.image.alt || index}>
+          <RevealItem className={styles.item} index={index} key={item.image.alt || index}>
             <div className={styles.imageWrap}>
-              <Image src={item.image.src} alt={item.image.alt} fill className={styles.image} />
+              <Reveal variant="image">
+                <Image src={item.image.src} alt={item.image.alt} fill className={styles.image} />
+              </Reveal>
             </div>
             {(item.title || item.description) && (
               <div className={styles.captionBlock}>
@@ -31,9 +36,9 @@ export default function GalleryStrip({ items, columns = 3 }: GalleryStripProps) 
               </div>
             )}
             {item.caption && <p className={styles.caption}>{item.caption}</p>}
-          </div>
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
     </section>
   );
 }

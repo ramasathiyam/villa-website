@@ -1,0 +1,51 @@
+/* Base state = fully visible, no transform — this is what server-rendered markup and a
+   page with JS disabled/failed both show. Only [data-armed="true"] (set by useInView once
+   JS confirms the element is off-screen at mount) switches to the hidden pre-reveal state
+   and enables the transition; [data-visible="true"] then animates it back to this same
+   base state. Opacity + transform only (never layout-triggering properties). */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* "image" variant renders as an inset wrapper matching next/image's `fill` positioning —
+   it must sit inside an existing `position: relative` image container. */
+.image {
+  position: absolute;
+  inset: 0;
+}
+
+.reveal[data-armed="true"] {
+  opacity: 0;
+  transition:
+    opacity var(--motion-duration) var(--motion-easing),
+    transform var(--motion-duration) var(--motion-easing);
+}
+
+.fadeUp[data-armed="true"] {
+  transform: translateY(var(--motion-distance));
+}
+
+/* Opacity-only variant — no translateY at all (e.g. Footer, which the motion spec allows
+   only a plain fade-in for, no movement). */
+.fade[data-armed="true"] {
+  transform: none;
+}
+
+.image[data-armed="true"] {
+  transform: scale(1.03);
+  transition-duration: var(--motion-duration-image);
+}
+
+.reveal[data-armed="true"][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal[data-armed="true"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

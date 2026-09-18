@@ -1,5 +1,6 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import RuleLink from "@/components/ui/RuleLink";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./IntroSection.module.css";
 
 // Centered heading + short paragraph + rule-link, e.g. "About Us" / "Rooms" / "Spa"
@@ -23,13 +24,15 @@ export default function IntroSection({
 }: IntroSectionProps) {
   return (
     <section className={styles.intro}>
-      <SectionHeading>{heading}</SectionHeading>
-      <p>{body}</p>
-      {linkLabel && (
-        <RuleLink href={linkHref} disabled={linkDisabled} disabledReason={linkDisabledReason}>
-          {linkLabel}
-        </RuleLink>
-      )}
+      <Reveal className={styles.content}>
+        <SectionHeading>{heading}</SectionHeading>
+        <p>{body}</p>
+        {linkLabel && (
+          <RuleLink href={linkHref} disabled={linkDisabled} disabledReason={linkDisabledReason}>
+            {linkLabel}
+          </RuleLink>
+        )}
+      </Reveal>
     </section>
   );
 }

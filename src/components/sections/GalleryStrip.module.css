@@ -18,6 +18,8 @@
 
 .imageWrap {
   position: relative;
+  /* Clips the Reveal image variant's subtle scale(1.03 -> 1) entrance. */
+  overflow: hidden;
   aspect-ratio: 1 / 1;
   background: repeating-linear-gradient(45deg, #e9e4d8, #e9e4d8 10px, #ddd6c4 10px, #ddd6c4 20px);
 }

@@ -3,6 +3,7 @@
 import { Children, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./CardGrid.module.css";
 
 // Card row used for Rooms and Activities (CLAUDE.md §8.5). Takes any card component as
@@ -109,19 +110,26 @@ export default function CardGrid({ heading, children, dotCount }: CardGridProps)
 
   return (
     <section className={styles.section}>
-      {heading && (
-        <div className={styles.heading}>
-          <SectionHeading>{heading}</SectionHeading>
-        </div>
-      )}
-
-      <div className={styles.track} ref={trackRef}>
-        {items.map((child, index) => (
-          <div className={styles.slide} key={index}>
-            {child}
+      {/* One Reveal for the whole heading + carousel row, not per-card — cards further
+          along a horizontal carousel can sit outside the browser viewport horizontally
+          (clipped by the track's own overflow-x), so a per-card observer would leave
+          off-screen cards stuck invisible until dragged into view. Revealing the row as
+          a unit (by its own vertical position) avoids that. */}
+      <Reveal>
+        {heading && (
+          <div className={styles.heading}>
+            <SectionHeading>{heading}</SectionHeading>
           </div>
-        ))}
-      </div>
+        )}
+
+        <div className={styles.track} ref={trackRef}>
+          {items.map((child, index) => (
+            <div className={styles.slide} key={index}>
+              {child}
+            </div>
+          ))}
+        </div>
+      </Reveal>
 
       {dotCount && dotCount > 1 && (
         <div className={styles.dots}>

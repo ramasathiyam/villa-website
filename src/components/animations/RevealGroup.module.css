@@ -1,0 +1,32 @@
+/* RevealItem: no JS/observer of its own — it becomes visible purely via this CSS
+   descendant-selector cascade once its ancestor RevealGroup sets data-armed/data-visible.
+   height:100% + flex column passes a CSS-Grid row's stretched height through to whatever
+   card component sits inside (e.g. RoomCard), so equal-height card rows aren't affected. */
+.item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-armed="true"] .item {
+  opacity: 0;
+  transform: translateY(var(--motion-distance));
+  transition:
+    opacity var(--motion-duration) var(--motion-easing),
+    transform var(--motion-duration) var(--motion-easing);
+  /* --stagger-i is set inline per item by RevealItem (0, 1, 2, ...) */
+  transition-delay: calc(var(--stagger-i, 0) * var(--motion-stagger-step));
+}
+
+[data-armed="true"][data-visible="true"] .item {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-armed="true"] .item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

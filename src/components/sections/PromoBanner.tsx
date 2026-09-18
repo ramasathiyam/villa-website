@@ -2,6 +2,7 @@ import Image from "next/image";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
 import RuleLink from "@/components/ui/RuleLink";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./PromoBanner.module.css";
 
 // Full-width dark promo banner (e.g. "Amed Escape", "Halloween") — appears on every
@@ -63,22 +64,24 @@ export default function PromoBanner({
   return (
     <section className={styles.banner}>
       {image ? (
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          className={styles.image}
-          style={{ objectPosition: imagePosition }}
-        />
+        <Reveal variant="image">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            className={styles.image}
+            style={{ objectPosition: imagePosition }}
+          />
+        </Reveal>
       ) : (
         // TODO: replace with real photography once available (plan §M.1)
         <div className={styles.placeholder} aria-hidden="true" />
       )}
       <div className={styles.overlay} aria-hidden="true" />
 
-      <div className={styles.content}>
+      <Reveal className={styles.content}>
         {contentPanel ? <div className={styles.panel}>{textColumns}</div> : textColumns}
-      </div>
+      </Reveal>
     </section>
   );
 }

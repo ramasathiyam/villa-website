@@ -2,6 +2,7 @@ import Image from "next/image";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import SectionHeading from "@/components/ui/SectionHeading";
 import RuleLink from "@/components/ui/RuleLink";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./FeatureBlock.module.css";
 
 // Eyebrow + heading + paragraph + rule-link beside an image, alternating sides
@@ -48,7 +49,7 @@ export default function FeatureBlock({
         .filter(Boolean)
         .join(" ")}
     >
-      <div className={[styles.text, isOverlap ? styles.card : ""].filter(Boolean).join(" ")}>
+      <Reveal className={[styles.text, isOverlap ? styles.card : ""].filter(Boolean).join(" ")}>
         {eyebrow && <EyebrowLabel>{eyebrow}</EyebrowLabel>}
         <SectionHeading as="h2" align="left">
           {heading}
@@ -59,17 +60,19 @@ export default function FeatureBlock({
             {linkLabel}
           </RuleLink>
         )}
-      </div>
+      </Reveal>
 
       <div className={styles.imageWrap}>
         {image ? (
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            className={styles.image}
-            style={{ objectPosition: imagePosition }}
-          />
+          <Reveal variant="image">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className={styles.image}
+              style={{ objectPosition: imagePosition }}
+            />
+          </Reveal>
         ) : (
           // TODO: replace with real photography once available (plan §M.1)
           <span aria-hidden="true" />

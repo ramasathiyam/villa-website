@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Elsie, Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Reveal from "@/components/animations/Reveal";
 import "./globals.css";
 
 // Confirmed brand fonts: Elsie (heading/display) + Inter (body/UI) — see tokens.css
@@ -38,7 +39,10 @@ export default function RootLayout({
             is a future concern — see Navbar.module.css TODO. */}
         <Navbar />
         <main>{children}</main>
-        <Footer />
+        {/* Footer: subtle fade-in only, per the motion spec — no translateY/movement. */}
+        <Reveal variant="fade">
+          <Footer />
+        </Reveal>
       </body>
     </html>
   );

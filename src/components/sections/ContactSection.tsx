@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./ContactSection.module.css";
 
 // One-off composite for the Contact page's "Contact Us / Get in Touch" section
@@ -32,7 +33,7 @@ export default function ContactSection({
 }: ContactSectionProps) {
   return (
     <section className={styles.section}>
-      <div>
+      <Reveal>
         <div className={styles.infoHeader}>
           <p className={styles.eyebrowRule}>{eyebrow}</p>
           <SectionHeading as="h2" align="left" uppercase={false}>
@@ -54,9 +55,9 @@ export default function ContactSection({
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
 
-      <div>
+      <Reveal delay={100}>
         <SectionHeading as="h2" align="left" className={styles.formHeading}>
           {formHeading}
         </SectionHeading>
@@ -139,7 +140,7 @@ export default function ContactSection({
             </Button>
           </div>
         </form>
-      </div>
+      </Reveal>
     </section>
   );
 }

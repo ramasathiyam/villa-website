@@ -7,6 +7,7 @@ import MenuItemCard from "@/components/cards/MenuItemCard";
 import Testimonials from "@/components/sections/Testimonials";
 import PromoBanner from "@/components/sections/PromoBanner";
 import { signatureCocktails } from "@/data/menu";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./page.module.css";
 
 // Section order and copy follow /design/Barak Rooftop and bar.png (Dining task): Hero ->
@@ -82,13 +83,15 @@ export default function BarakRooftopAndBarPage() {
           </CardGrid>
         </div>
         <div className={styles.cocktailsPhoto}>
-          <Image
-            src={`${ASSET_DIR}/feature-friends.png`}
-            alt="Guests sharing drinks and laughter at Barak Rooftop and Bar"
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className={styles.cocktailsPhotoImg}
-          />
+          <Reveal variant="image">
+            <Image
+              src={`${ASSET_DIR}/feature-friends.png`}
+              alt="Guests sharing drinks and laughter at Barak Rooftop and Bar"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className={styles.cocktailsPhotoImg}
+            />
+          </Reveal>
         </div>
       </div>
 

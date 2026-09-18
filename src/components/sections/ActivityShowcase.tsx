@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import Reveal from "@/components/animations/Reveal";
 import styles from "./ActivityShowcase.module.css";
 
 // One-off composite specific to the Activity page's "Get Active Outdoors or Try
@@ -30,15 +31,17 @@ export default function ActivityShowcase({
 }: ActivityShowcaseProps) {
   return (
     <section className={styles.section}>
-      <div className={styles.heading}>
+      <Reveal className={styles.heading}>
         <h2 className={styles.sectionHeading}>{heading}</h2>
-      </div>
+      </Reveal>
 
       <div className={styles.grid}>
         <div className={styles.main}>
-          <Image src={mainImage.src} alt={mainImage.alt} fill className={styles.mainImage} />
+          <Reveal variant="image">
+            <Image src={mainImage.src} alt={mainImage.alt} fill className={styles.mainImage} />
+          </Reveal>
           <div className={styles.mainOverlay} aria-hidden="true" />
-          <div className={styles.mainContent}>
+          <Reveal className={styles.mainContent}>
             <span className={styles.mainCaption}>{mainCaption}</span>
             <p className={styles.mainHeading}>{mainHeading}</p>
             <div>
@@ -46,13 +49,15 @@ export default function ActivityShowcase({
                 {linkLabel}
               </Button>
             </div>
-          </div>
+          </Reveal>
         </div>
 
         <div className={styles.collage}>
           {collage.map((item) => (
             <div className={styles.collageTile} key={item.alt}>
-              <Image src={item.src} alt={item.alt} fill className={styles.collageImage} />
+              <Reveal variant="image">
+                <Image src={item.src} alt={item.alt} fill className={styles.collageImage} />
+              </Reveal>
             </div>
           ))}
         </div>

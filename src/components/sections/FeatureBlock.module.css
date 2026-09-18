@@ -16,6 +16,8 @@
 
 .imageWrap {
   position: relative;
+  /* Clips the Reveal image variant's subtle scale(1.03 -> 1) entrance. */
+  overflow: hidden;
   /* Screenshot's feature image is a wide landscape crop (~2:1), not a portrait/4:3 box. */
   aspect-ratio: 2 / 1;
   background: repeating-linear-gradient(

@@ -34,8 +34,11 @@ export default function ActivityCard({ activity, roundedImage = false }: Activit
         {activity.description && <p className={styles.description}>{activity.description}</p>}
         {activity.includes && activity.includes.length > 0 && (
           <ul className={styles.includes}>
-            {activity.includes.map((line) => (
-              <li key={line}>{line}</li>
+            {/* Keyed by index, not the string itself — the placeholder "Yoga Session"
+                entry (src/data/activities.ts) repeats the same line 4x, which produced
+                duplicate keys and a React console error when the value was used as key. */}
+            {activity.includes.map((line, index) => (
+              <li key={index}>{line}</li>
             ))}
           </ul>
         )}
