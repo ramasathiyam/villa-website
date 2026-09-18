@@ -1,0 +1,45 @@
+/* Signature Cocktails row (design/Barak Rooftop and bar.png): cocktail carousel on a
+   cream panel beside the candid photo, side by side on desktop/tablet, stacked on
+   mobile. Full-bleed outer row (matches Testimonials' full-bleed cream section
+   immediately below it) with the carousel's own container-max centering its content
+   inside the left column. */
+.cocktailsRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Small white gap before the "What Our Guests Say" cream section — matches the thin
+     white strip visible in design/Barak Rooftop and bar.png between this row and
+     testimonials (they aren't flush against each other in the reference). */
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 1024px) {
+  .cocktailsRow {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+}
+
+.cocktailsCarousel {
+  background: var(--color-cream);
+  display: flex;
+  align-items: center;
+}
+
+.cocktailsCarousel > * {
+  width: 100%;
+}
+
+.cocktailsPhoto {
+  position: relative;
+  min-height: 420px;
+}
+
+@media (min-width: 1024px) {
+  .cocktailsPhoto {
+    min-height: 0;
+  }
+}
+
+.cocktailsPhotoImg {
+  object-fit: cover;
+}

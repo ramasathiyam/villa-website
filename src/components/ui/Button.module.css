@@ -1,0 +1,45 @@
+/* Sharp corners, no shadows — CLAUDE.md §7. Two treatments only: the tan nav pill
+   and the solid form/card button. The third treatment ("— DISCOVER MORE" rule-link)
+   lives in RuleLink.tsx, not here. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--color-accent-tan-dark);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  box-shadow: var(--shadow);
+}
+
+.primary {
+  background: transparent;
+  color: var(--color-white);
+  border-color: var(--color-white);
+}
+
+.primary:hover {
+  background: var(--color-white);
+  color: var(--color-text-heading);
+}
+
+.solid {
+  background: var(--color-accent-tan);
+  color: var(--color-text-heading);
+  border-color: var(--color-accent-tan);
+}
+
+.solid:hover {
+  background: var(--color-accent-tan-dark);
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}

@@ -1,0 +1,105 @@
+.section {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-7) var(--container-padding);
+}
+
+.heading {
+  margin-bottom: var(--space-5);
+}
+
+.sectionHeading {
+  /* User-requested override: this heading reads as body copy, not a display
+     heading — Inter, not Elsie (h2 would otherwise inherit serif from globals.css). */
+  font-family: var(--font-sans);
+  font-size: var(--text-h1);
+  font-weight: 600;
+  color: var(--color-text-heading);
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.main {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mainImage {
+  object-fit: cover;
+}
+
+.mainOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--overlay-dark-strong), transparent 60%);
+}
+
+.mainContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: var(--space-4);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mainCaption {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.mainHeading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-h1);
+  color: var(--color-white);
+  line-height: var(--line-height-heading);
+}
+
+.collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.collageTile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  /* These 4 source photos (design/activity/Frame 8.png, Frame 9*.png) have rounded
+     corners baked into the PNG itself (transparent corner pixels) — without a matching
+     radius + overflow:hidden here, the sharp rectangular wrapper let those transparent
+     corners show whatever was behind them, looking like a jagged, cut-off edge instead
+     of a clean rounded photo. */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.collageImage {
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1.7fr 1fr;
+    align-items: stretch;
+  }
+
+  .main {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}

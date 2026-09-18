@@ -1,0 +1,86 @@
+.banner {
+  position: relative;
+  /* Reference banners are wide/short letterboxed strips, not tall blocks. */
+  min-height: clamp(240px, 32vh, 340px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--color-text-heading);
+  color: var(--color-white);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, #2c2a26, #2c2a26 10px, #232120 10px, #232120 20px);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  /* Just a light scrim for general legibility — most contrast should come from the
+     photo's own tones (Halloween) or the .panel box (Amed Escape), not a heavy
+     full-banner overlay crushing the image. */
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  /* Reference: both columns' first lines start at the same height (eyebrow-to-eyebrow) —
+     top-aligned, not vertically centered against each other. */
+  align-items: flex-start;
+  /* Centered as a group (textCol + copy sit close together in the middle of the banner),
+     not spread edge-to-edge and not left-stuck — applies to both the boxed (.panel) and
+     unboxed (Halloween) variants. */
+  justify-content: center;
+  /* 220px only reads right on wide desktop rows; below that the two columns wrap and
+     stacked flex items would inherit the same value as vertical gap, leaving a huge
+     empty gap between them (visible on Spa's mobile view). */
+  gap: var(--space-5);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-5) var(--container-padding);
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    gap: 220px;
+  }
+}
+
+/* Boxed variant (e.g. Amed Escape): wraps textCol + copy tightly together in a
+   semi-transparent panel sized to its content, instead of spreading them across the
+   full banner width — matches the reference's visible rectangle behind the text. */
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-8);
+  background: rgba(0, 0, 0, 0.45);
+  padding: var(--space-4) var(--space-5);
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.textCol h2 {
+  color: var(--color-white);
+}
+
+.copy {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}

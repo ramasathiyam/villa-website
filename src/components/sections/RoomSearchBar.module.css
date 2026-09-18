@@ -1,0 +1,86 @@
+/* Room-only search widget (design/ROOM.png): a white panel that overlaps the bottom edge
+   of the hero. This is the one deliberate exception to CLAUDE.md §7's sharp-corner rule —
+   the reference gives this specific widget rounded corners (panel, field pills, button),
+   scoped to this component only via --search-radius rather than the shared --radius
+   token, so every other button/card on the site stays sharp-cornered as usual. */
+.wrap {
+  --search-radius: 12px;
+  /* Rendered as a normal sibling AFTER Hero in the page (not as Hero's children) and
+     pulled up with a negative margin instead of being absolutely positioned inside it:
+     Hero has overflow:hidden (to contain its background image), which would clip
+     anything anchored to it that's meant to spill past its bottom edge — and Hero's own
+     layout is a row flex container centering its title block, so an extra flex-item
+     child would also fight the title for horizontal space. Staying out of Hero entirely
+     avoids both problems without touching the shared Hero component for this one page.
+     See CLAUDE.md: don't modify the global Hero just for Room. */
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: 0 var(--container-padding);
+  margin-top: -64px;
+}
+
+.panel {
+  background: var(--color-white);
+  border-radius: var(--search-radius);
+  padding: var(--space-4);
+  display: grid;
+  /* minmax(0, 1fr), not bare 1fr: a bare 1fr track won't shrink below its content's
+     min-content width, and a native <input type="date"> has a fairly wide intrinsic
+     min-content size — without the 0 floor the grid (and the date inputs inside it)
+     silently overflowed past the viewport at the 1024px breakpoint, invisible to a
+     scrollWidth check because html/body have overflow-x:hidden as a safety net. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+@media (min-width: 768px) {
+  .panel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) auto;
+    align-items: end;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  background: var(--color-cream);
+  border-radius: var(--search-radius);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--color-text-heading);
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  margin-top: var(--space-2);
+  border: var(--border-width) solid var(--color-rule);
+  border-radius: var(--search-radius);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--color-text-heading);
+  background: var(--color-white);
+  min-height: 42px;
+}
+
+.submit {
+  border-radius: var(--search-radius);
+  min-height: 100%;
+  padding-inline: var(--space-6);
+}

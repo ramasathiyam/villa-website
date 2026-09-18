@@ -1,0 +1,106 @@
+.roomGrid {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: 0 var(--container-padding) var(--space-7);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .roomGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .roomGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* ---- Family Room + Hotel Information composite (design/ROOM.png) — one-off layout,
+   not worth abstracting into a shared component for a single occurrence. ---- */
+.familyRoom {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+  border: var(--border-width) solid var(--color-rule);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .familyRoom {
+    grid-template-columns: 1.1fr 0.7fr 1.3fr;
+  }
+}
+
+.familyPhoto {
+  position: relative;
+  min-height: 320px;
+}
+
+.familyLabel {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-text-heading);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-body);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-heading);
+  padding: var(--space-2) var(--space-3);
+}
+
+.familyBadge {
+  position: absolute;
+  bottom: var(--space-3);
+  left: var(--space-3);
+  z-index: 1;
+}
+
+.familyPhotoImg {
+  object-fit: cover;
+}
+
+.familyDetailCol {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.familyDetailPhoto {
+  position: relative;
+  min-height: 160px;
+}
+
+.familyDetailImg {
+  object-fit: cover;
+}
+
+.familyInfo {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.familyMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.familyMetaItem {
+  font-size: var(--text-small);
+  color: var(--color-text-body);
+}
+
+.familyFooter {
+  margin-top: var(--space-2);
+}

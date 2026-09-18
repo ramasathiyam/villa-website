@@ -1,0 +1,164 @@
+/* Overlay navbar on top of the hero image (CLAUDE.md §2): transparent, white text,
+   three stacked rows — utility/Book Now, centered logo, centered nav links.
+   TODO: a solid/sticky state on scroll is expected in production but every current
+   page has a hero behind the navbar, so it's out of scope until a hero-less page exists. */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  color: var(--color-white);
+}
+
+.utilityRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-2) var(--container-padding) 0;
+}
+
+.contactIcons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-small);
+}
+
+.utilityRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.logoRow {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2) var(--container-padding);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImage {
+  width: 140px;
+  height: auto;
+}
+
+.navRow {
+  display: none;
+  justify-content: center;
+  padding-bottom: var(--space-3);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  list-style: none;
+}
+
+.links a,
+.linkDisabled {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+}
+
+.linkDisabled {
+  color: inherit;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bookNow {
+  margin-left: var(--space-3);
+}
+
+/* ---- Dining dropdown (desktop) — hover + click, state driven by NavDropdown.tsx ---- */
+.navItemWithChildren {
+  position: relative;
+}
+
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.caret {
+  font-size: 9px;
+  line-height: 1;
+}
+
+.dropdown {
+  position: absolute;
+  /* No gap between the trigger and the menu: the hoverable hit-area must be
+     continuous, otherwise moving the pointer down from the trigger to a link
+     crosses empty space and drops :hover before the click lands. Visual
+     breathing room comes from padding-top instead of a margin gap. */
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: var(--space-3);
+  min-width: 210px;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease;
+}
+
+.dropdown ul {
+  background: var(--color-footer-bg);
+  padding: var(--space-2) 0;
+  list-style: none;
+}
+
+/* Visibility is driven by NavDropdown's React state (data-open), set from mouseenter/
+   mouseleave on this whole <li> and toggled by clicking the trigger — not a bare :hover
+   on the trigger, which would never close after clicking a submenu link (Next.js
+   client-side navigation doesn't move the pointer away). :focus-within stays as a
+   keyboard-only fallback (Tab into the menu without a click). */
+.navItemWithChildren[data-open="true"] .dropdown,
+.navItemWithChildren:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown a {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 150ms ease;
+}
+
+.dropdown a:hover,
+.dropdown a:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 1024px) {
+  .navRow {
+    display: flex;
+  }
+}

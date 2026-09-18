@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.name {
+  /* Menu information is Inter, not Elsie — h4 would otherwise inherit serif from
+     globals.css (matches the same fix already applied to ActivityCard's title). */
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: repeating-linear-gradient(45deg, #e9e4d8, #e9e4d8 10px, #ddd6c4 10px, #ddd6c4 20px);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.description {
+  font-size: var(--text-small);
+  color: var(--color-text-body);
+}

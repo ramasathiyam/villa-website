@@ -1,0 +1,76 @@
+/*
+  Design tokens — derived from CLAUDE.md (§4 Color, §3 Typography, §5 Spacing, §10/§11 Layout).
+  Values are approximate, sampled visually from /design screenshots — refine with real
+  color-picking against source files before final implementation (see CLAUDE.md §4 note).
+
+  Breakpoints are documented here as a reference, but CSS custom properties cannot be used
+  inside @media conditions — every component's media queries must hardcode these same pixel
+  values. Keep this comment block as the single source of truth for those numbers:
+    --bp-mobile:  480px
+    --bp-tablet:  768px
+    --bp-laptop:  1024px
+    --bp-desktop: 1280px
+*/
+
+:root {
+  /* ---- Color (CLAUDE.md §4) ---- */
+  --color-bg: #ffffff;
+  --color-footer-bg: #0a0a0a;
+  --color-cream: #f4efe6;
+  --color-text-heading: #262421;
+  --color-text-body: #6e6b66;
+  --color-accent-tan: #c2a46b;
+  --color-accent-tan-dark: #b9a06a;
+  --color-rule: #a8a49c;
+  --color-white: #ffffff;
+  --overlay-dark-soft: rgba(0, 0, 0, 0.3);
+  --overlay-dark-strong: rgba(0, 0, 0, 0.5);
+
+  /* ---- Typography (CLAUDE.md §3) ---- */
+  /* Confirmed brand fonts, loaded via next/font/google in layout.tsx:
+     Elsie (--font-elsie)  -> heading/display: Hero title, section headings, brand mark
+     Inter (--font-inter)  -> body/UI: nav, body text, buttons, labels, footer */
+  /* Only a generic CSS fallback keyword after the real font — never a named third-party
+     font (Georgia, Times New Roman, Segoe UI, Arial). That keyword is a last-resort
+     technical fallback for if next/font fails entirely, not a second design font. */
+  --font-serif: var(--font-elsie), serif;
+  --font-sans: var(--font-inter), sans-serif;
+
+  --text-hero: clamp(2.25rem, 5vw, 4.25rem);
+  --text-h1: clamp(1.75rem, 3.2vw, 2.75rem);
+  --text-h2: clamp(1.375rem, 2.4vw, 1.875rem);
+  --text-body: 1rem;
+  --text-small: 0.9375rem;
+  --text-label: 0.75rem;
+
+  --tracking-hero: 0.05em;
+  --tracking-heading: 0.02em;
+  --tracking-label: 0.15em;
+  --tracking-nav: 0.1em;
+
+  --line-height-heading: 1.2;
+  --line-height-body: 1.7;
+
+  /* ---- Spacing (CLAUDE.md §5) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 120px;
+
+  /* ---- Layout (CLAUDE.md §10) ---- */
+  --container-max: 1280px;
+  --container-padding: 24px;
+  /* Hero is full-viewport-height (100vh/100dvh), declared directly in Hero.module.css —
+     no token here since it's a pair of fallback declarations, not a single value. */
+
+  /* ---- Buttons / borders (CLAUDE.md §7 — sharp corners, no shadows) ---- */
+  --radius: 0px;
+  --border-width: 1px;
+  --shadow: none;
+  --transition-fast: 150ms ease;
+}

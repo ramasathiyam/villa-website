@@ -1,0 +1,114 @@
+.hero {
+  position: relative;
+  /* Full viewport height on every page (Home, Room, Activity, Spa, Dining) — Navbar is
+     position:absolute (see Navbar.module.css) so it overlays this without adding to its
+     height. 100vh is the baseline; @supports upgrades to 100dvh where available, so
+     mobile browser chrome doesn't clip/jump the content. A plain duplicate declaration
+     doesn't survive this project's CSS minifier (it dedupes same-property values and
+     keeps only the last one), so the fallback has to be expressed as a real conditional. */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-text-heading);
+}
+
+@supports (min-height: 100dvh) {
+  .hero {
+    min-height: 100dvh;
+  }
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(
+    45deg,
+    #3a3733,
+    #3a3733 10px,
+    #322f2b 10px,
+    #322f2b 20px
+  );
+  color: var(--color-white);
+  font-size: var(--text-small);
+  text-align: center;
+  padding: var(--space-3);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    var(--overlay-dark-soft),
+    var(--overlay-dark-strong)
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: var(--color-white);
+  padding: var(--space-6) var(--container-padding);
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+/* Activity's reference: title sits left-aligned within the content column, while the
+   longer "statement" subtitle below it stays centered (see .subtitleStatement's
+   align-self) — a mixed-alignment layout, not a simple center↔left toggle. */
+.contentLeft {
+  align-items: flex-start;
+}
+
+.title {
+  font-size: var(--text-hero);
+  letter-spacing: var(--tracking-hero);
+  text-transform: uppercase;
+  color: var(--color-white);
+  /* Reference design breaks the title onto two lines at "&" (e.g. "Amed Café &" /
+     "Hotel Kebun Wayan") rather than letting it run onto one line on wide viewports —
+     pre-line respects a literal \n in the title string while still wrapping normally. */
+  white-space: pre-line;
+}
+
+.titleLeft {
+  text-align: left;
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-size: var(--text-small);
+}
+
+.subtitleStatement {
+  align-self: center;
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: var(--text-body);
+  line-height: var(--line-height-body);
+  max-width: 640px;
+  margin-top: var(--space-6);
+}

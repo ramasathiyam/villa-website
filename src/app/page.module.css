@@ -1,0 +1,7 @@
+/* Widens just the Halloween promo banner's paragraph (PromoBanner's shared .copy default
+   is 360px) so it wraps to fewer, longer lines instead of three short ones. Scoped to
+   this one instance via PromoBanner's copyClassName prop — every other PromoBanner on
+   the site keeps the shared default width. */
+.halloweenCopy {
+  max-width: 520px;
+}

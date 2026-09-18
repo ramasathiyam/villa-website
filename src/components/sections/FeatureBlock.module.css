@@ -1,0 +1,74 @@
+.block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-6) var(--container-padding);
+  align-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.imageWrap {
+  position: relative;
+  /* Screenshot's feature image is a wide landscape crop (~2:1), not a portrait/4:3 box. */
+  aspect-ratio: 2 / 1;
+  background: repeating-linear-gradient(
+    45deg,
+    #e9e4d8,
+    #e9e4d8 10px,
+    #ddd6c4 10px,
+    #ddd6c4 20px
+  );
+}
+
+.image {
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .block {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reverse {
+    direction: rtl;
+  }
+
+  .reverse > * {
+    direction: ltr;
+  }
+}
+
+/* Overlap variant (SPA page, CLAUDE.md §6) — the text becomes a cream card that floats
+   partially over the image's edge instead of sitting cleanly beside it. Kept separate
+   from .reverse's direction:rtl trick (mixing the two would double-flip the layout);
+   left/right is controlled here with plain source order instead. Card and negative
+   margin are scoped to ≥768px — below that it just stacks normally, no overlap. */
+.overlapBlock {
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .overlapBlock .card {
+    position: relative;
+    z-index: 1;
+    background: var(--color-cream);
+    padding: var(--space-5);
+    margin-right: -14%;
+  }
+
+  .overlapImageLeft .imageWrap {
+    order: -1;
+  }
+
+  .overlapImageLeft .card {
+    margin-right: 0;
+    margin-left: -14%;
+  }
+}
